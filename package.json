@@ -1,0 +1,34 @@
+{
+  "name": "react-redux-router-forms",
+  "version": "1.0.0",
+  "description": "React + Redux + React Router + Forms example",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eiriklv/react-redux-router-forms.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eiriklv/react-redux-router-forms/issues"
+  },
+  "dependencies": {
+    "babel": "5.8.x",
+    "babel-core": "5.8.x",
+    "babel-loader": "5.3.x",
+    "lodash": "3.10.x",
+    "react": "0.13.x",
+    "react-redux": "1.0.x",
+    "react-router": "^1.0.0-beta3",
+    "redux": "1.0.x",
+    "redux-logger": "0.0.x",
+    "redux-thunk": "0.1.x",
+    "seamless-immutable": "3.0.x"
+  },
+  "devDependencies": {
+    "react-hot-loader": "1.2.x",
+    "webpack": "1.11.x",
+    "webpack-dev-server": "1.10.x"
+  }
+}
