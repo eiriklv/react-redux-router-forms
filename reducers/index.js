@@ -2,70 +2,101 @@ import { combineReducers } from 'redux';
 import _ from 'lodash';
 
 import {
-  POPULATE_DATA,
-  POPULATE_DATA_SUCCESS,
-  POPULATE_DATA_ERROR,
-  SAVE_DATA,
-  SAVE_DATA_SUCCESS,
-  SAVE_DATA_ERROR,
-  UPDATE_DATA
+  POPULATE_INBOX_PENDING,
+  POPULATE_INBOX_SUCCESS,
+  POPULATE_INBOX_ERROR,
+  POPULATE_SELECTED_NOTE_PENDING,
+  POPULATE_SELECTED_NOTE_SUCCESS,
+  POPULATE_SELECTED_NOTE_ERROR,
+  SAVE_NOTE_PENDING,
+  SAVE_NOTE_SUCCESS,
+  SAVE_NOTE_ERROR,
+  DELETE_NOTE_PENDING,
+  DELETE_NOTE_SUCCESS,
+  DELETE_NOTE_ERROR,
+  UPDATE_NOTE_SUCCESS
 } from '../actions';
 
-const defaultAppState = {};
-
-const defaultFormState = {
+const defaultSelectedNoteState = {
   error: null,
   isLoading: false,
   isSaving: false,
   unsavedChanges: false,
-  data: {
-    firstname: '',
-    lastname: '',
-    message: ''
+  note: {
+    id: 0,
+    subject: 'default',
+    content: 'default'
   }
 };
 
-function appData(state = defaultAppState, action) {
+const defaultInboxState = {
+  error: null,
+  isLoading: false,
+  notes: []
+};
+
+function inbox(state = defaultInboxState, action) {
   switch (action.type) {
+    case POPULATE_INBOX_PENDING:
+      return _.assign({}, state, {
+        isLoading: true
+      });
+    case POPULATE_INBOX_SUCCESS:
+      return _.assign({}, state, {
+        isLoading: false,
+        error: null,
+        notes: action.notes
+      });
+    case POPULATE_INBOX_ERROR:
+      return _.assign({}, state, {
+        error: action.error,
+      });
+    case DELETE_NOTE_PENDING:
+      return state;
+    case DELETE_NOTE_SUCCESS:
+      return state;
+    case DELETE_NOTE_ERROR:
+      return state;
+
     default:
       return state;
   }
 }
 
-function formData(state = defaultFormState, action) {
+function selectedNote(state = defaultSelectedNoteState, action) {
   switch (action.type) {
-    case POPULATE_DATA:
+    case POPULATE_SELECTED_NOTE_PENDING:
       return _.assign({}, state, {
         isLoading: true
       });
-    case POPULATE_DATA_SUCCESS:
+    case POPULATE_SELECTED_NOTE_SUCCESS:
       return _.assign({}, state, {
         isLoading: false,
         error: null,
-        data: action.data
+        note: action.note
       });
-    case POPULATE_DATA_ERROR:
+    case POPULATE_SELECTED_NOTE_ERROR:
       return _.assign({}, state, {
         error: action.error,
       });
-    case SAVE_DATA:
+    case SAVE_NOTE_PENDING:
       return _.assign({}, state, {
         isSaving: true,
         error: null
       });
-    case SAVE_DATA_SUCCESS:
+    case SAVE_NOTE_SUCCESS:
       return _.assign({}, state, {
         isSaving: false,
         unsavedChanges: false
       });
-    case SAVE_DATA_ERROR:
+    case SAVE_NOTE_ERROR:
       return _.assign({}, state, {
         error: action.error,
       });
-    case UPDATE_DATA:
+    case UPDATE_NOTE_SUCCESS:
       return _.assign({}, state, {
         unsavedChanges: true,
-        data: _.assign({}, state.data, action.update)
+        note: _.assign({}, state.note, action.update)
       });
 
     default:
@@ -74,8 +105,8 @@ function formData(state = defaultFormState, action) {
 }
 
 const rootReducer = combineReducers({
-  appData,
-  formData
+  inbox,
+  selectedNote
 });
 
 export default rootReducer;

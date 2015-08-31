@@ -31,20 +31,4 @@ App.contextTypes = {
   history: PropTypes.object.isRequired
 };
 
-App.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }),
-  params: PropTypes.shape({
-    name: PropTypes.string
-  }).isRequired,
-  children: PropTypes.node
-};
-
-function mapStateToProps(state) {
-  return state.appData
-}
-
-export default connect(
-  mapStateToProps
-)(App);
+export default App;

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 
-export default class MyForm extends Component {
+export default class Note extends Component {
   componentDidUpdate() {
     const {
       save,
@@ -17,11 +17,10 @@ export default class MyForm extends Component {
 
   render() {
     const {
-      title,
       save,
       update,
       refresh,
-      data,
+      note,
       isSaving,
       isLoading,
       unsavedChanges
@@ -34,7 +33,7 @@ export default class MyForm extends Component {
     return (
       <div>
         <h1>
-          {title}
+          {Note}
           {unsavedChanges && (
             <span> (*)</span>
           )}
@@ -44,33 +43,23 @@ export default class MyForm extends Component {
         </h1>
 
         <div>
-          <label htmlFor=''>Enter your first name: </label>
+          <label htmlFor=''>Subject: </label>
           <input
-            id='firstname'
-            name='firstname'
+            id='subject'
+            name='subject'
             type='text'
-            value={this.props.data.firstname}
-            onChange={update.bind(null, 'firstname')}
+            value={note.subject}
+            onChange={update.bind(null, 'subject')}
           />
         </div>
         <div>
-          <label htmlFor=''>Enter your last name: </label>
+          <label htmlFor=''>Content: </label>
           <input
-            id='lastname'
-            name='lastname'
+            id='content'
+            name='content'
             type='text'
-            value={this.props.data.lastname}
-            onChange={update.bind(null, 'lastname')}
-          />
-        </div>
-        <div>
-          <label htmlFor=''>Enter a message: </label>
-          <input
-            id='message'
-            name='message'
-            type='text'
-            value={this.props.data.message}
-            onChange={update.bind(null, 'message')}
+            value={note.content}
+            onChange={update.bind(null, 'content')}
           />
         </div>
       </div>
@@ -78,31 +67,30 @@ export default class MyForm extends Component {
   }
 }
 
-MyForm.propTypes = {
-  title: PropTypes.string.isRequired,
+Note.propTypes = {
   isSaving: PropTypes.bool,
   isLoading: PropTypes.bool,
   unsavedChanges: PropTypes.bool,
   save: PropTypes.func,
   update: PropTypes.func,
   refresh: PropTypes.func,
-  data: PropTypes.shape({
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    message: PropTypes.string
-  })
+  note: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    subject: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired
+  }).isRequired
 };
 
-MyForm.defaultProps = {
+Note.defaultProps = {
   isSaving: false,
   isLoading: false,
   unsavedChanges: false,
   save: (() => { console.log('no save method provided') }),
   update: (() => { console.log('no update method provided') }),
   refresh: (() => { console.log('no refresh method provided') }),
-  data: {
-    firstname: '',
-    lastname: '',
-    message: ''
+  note: {
+    id: 999,
+    subject: 'abc',
+    content: 'dsfdghjh'
   }
 };
