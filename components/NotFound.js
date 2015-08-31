@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class LoadingSpinner extends Component {
+export default class NotFound extends Component {
   render() {
     return (
-      <div>Loading..</div>
+      <div>Not found.. :(</div>
     );
   }
 }

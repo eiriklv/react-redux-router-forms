@@ -2,17 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import Home from '../components/Home';
 
 class App extends Component {
   handleChange(nextValue) {
     // Available thanks to contextTypes below
-    const { router } = this.context;
-    router.transitionTo(`/${nextValue}`);
-  }
-
-  componentDidMount() {
-    console.log('props:', this.props);
-    console.log('context:', this.context);
+    const { history } = this.context;
+    history.pushState(`/${nextValue}`);
   }
 
   render() {
@@ -24,8 +20,7 @@ class App extends Component {
     return (
       <div>
         <Navigation />
-        {'This is the app'}
-        {children}
+        {children || <Home />}
         <Footer />
       </div>
     );

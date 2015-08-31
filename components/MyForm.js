@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import LoadingSpinner from './LoadingSpinner';
 
 export default class MyForm extends Component {
   componentDidUpdate() {
@@ -8,8 +9,9 @@ export default class MyForm extends Component {
       unsavedChanges
     } = this.props;
 
-    if (unsavedChanges && !isSaving) {
-      save();
+    if (!isSaving && unsavedChanges) {
+      clearTimeout(this._saveTimeout);
+      this._saveTimeout = setTimeout(save, 500);
     }
   }
 
@@ -21,12 +23,25 @@ export default class MyForm extends Component {
       refresh,
       data,
       isSaving,
+      isLoading,
       unsavedChanges
     } = this.props;
 
+    if (isLoading) {
+      return <LoadingSpinner />
+    }
+
     return (
       <div>
-        <h1>{title}</h1>
+        <h1>
+          {title}
+          {unsavedChanges && (
+            <span> (*)</span>
+          )}
+          {isSaving && (
+            <span> (saving..)</span>
+          )}
+        </h1>
 
         <div>
           <label htmlFor=''>Enter your first name: </label>
@@ -66,6 +81,7 @@ export default class MyForm extends Component {
 MyForm.propTypes = {
   title: PropTypes.string.isRequired,
   isSaving: PropTypes.bool,
+  isLoading: PropTypes.bool,
   unsavedChanges: PropTypes.bool,
   save: PropTypes.func,
   update: PropTypes.func,
@@ -79,6 +95,7 @@ MyForm.propTypes = {
 
 MyForm.defaultProps = {
   isSaving: false,
+  isLoading: false,
   unsavedChanges: false,
   save: (() => { console.log('no save method provided') }),
   update: (() => { console.log('no update method provided') }),

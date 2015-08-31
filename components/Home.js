@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class LoadingSpinner extends Component {
+export default class Home extends Component {
   render() {
     return (
-      <div>Loading..</div>
+      <div>This is the landing page</div>
     );
   }
 }

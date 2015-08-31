@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class ErrorMessage extends Component {
-  render () {
+  render() {
     return (
-      <span>Error: {this.props.error}</span>
+      <div>Error: {this.props.error}</div>
     );
   }
 }

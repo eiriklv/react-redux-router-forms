@@ -26,18 +26,8 @@ class SecondPage extends Component {
   }
 
   handleSaveData() {
-    const {
-      isSaving,
-      unsavedChanges,
-      saveData
-    } = this.props;
-
-    if (!isSaving && unsavedChanges) {
-      clearTimeout(this._saveTimeout);
-      this._saveTimeout = setTimeout(() => {
-        saveData();
-      }, 500);
-    }
+    const { saveData } = this.props;
+    saveData();
   }
 
   handleRefreshData() {
@@ -68,7 +58,7 @@ class SecondPage extends Component {
         data={this.props.data}
         isSaving={this.props.isSaving}
         unsavedChanges={this.props.unsavedChanges}
-        refresh={this.handlePopulateData}
+        refresh={this.handleRefreshData}
         save={this.handleSaveData}
         update={this.handleUpdateData}
       />

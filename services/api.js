@@ -8,9 +8,13 @@ let data = {
 
 export function save(newData) {
   data = _.assign({}, data, newData);
-  return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, 1000);
+  });
 }
 
 export function fetch() {
-  return Promise.resolve(_.assign({}, data));
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve.bind(null, _.assign({}, data)), 1000);
+  })
 }

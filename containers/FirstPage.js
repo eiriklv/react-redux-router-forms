@@ -26,18 +26,8 @@ class FirstPage extends Component {
   }
 
   handleSaveData() {
-    const {
-      isSaving,
-      unsavedChanges,
-      saveData
-    } = this.props;
-
-    if (!isSaving && unsavedChanges) {
-      clearTimeout(this._saveTimeout);
-      this._saveTimeout = setTimeout(() => {
-        saveData();
-      }, 500);
-    }
+    const { saveData } = this.props;
+    saveData();
   }
 
   handleRefreshData() {
