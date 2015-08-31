@@ -1,15 +1,15 @@
 import _ from 'lodash';
 
 let notes = [{
-  id: 0,
+  id: "0",
   subject: 'Subject 0',
   content: 'Content 0'
 }, {
-  id: 1,
+  id: "1",
   subject: 'Subject 1',
   content: 'Content 1'
 }, {
-  id: 2,
+  id: "2",
   subject: 'Subject 2',
   content: 'Content 2'
 }];
@@ -20,13 +20,13 @@ export function createNewNote() {
   let id = notesCount++;
 
   notes.push({
-    id: id,
+    id: id.toString(),
     subject: '(no subject)',
     content: '(no content)'
   });
 
   return new Promise((resolve, reject) => {
-    setTimeout(resolve.bind(null, _.assign({}, _.find(notes, { id: id }))), 1000);
+    setTimeout(resolve.bind(null, id, 1000));
   });
 }
 

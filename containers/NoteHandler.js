@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import Note from '../components/Note';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
+import NotFound from '../components/NotFound';
 
 import {
   populateSelectedNote,
@@ -18,27 +19,31 @@ class NoteHandler extends Component {
 
     this.handleSaveNote = ::this.handleSaveNote;
     this.handleRefreshNote = ::this.handleRefreshNote;
-    this.handleUpdateNote = ::this.handleUpdateData;
+    this.handleUpdateNote = ::this.handleUpdateNote;
   }
 
   componentDidMount() {
-    this.handleRefreshData();
+    this.handleRefreshNote();
   }
 
   handleSaveNote() {
-    const { saveData } = this.props;
+    const { saveNote } = this.props;
     saveNote();
   }
 
   handleRefreshNote() {
-    const { populateSelectedNote } = this.props;
-    populateSelectedNote();
+    const {
+      populateSelectedNote,
+      params
+    } = this.props;
+
+    populateSelectedNote(params.id);
   }
 
-  handleUpdateNote(id, field, event) {
+  handleUpdateNote(field, event) {
     const { updateNote } = this.props;
 
-    updateNote(id, {
+    updateNote({
       [field]: event.target.value
     });
   }
@@ -47,6 +52,8 @@ class NoteHandler extends Component {
     const {
       error,
       isLoading,
+      isSaving,
+      unsavedChanges,
       note
     } = this.props;
 
@@ -56,6 +63,10 @@ class NoteHandler extends Component {
 
     if (isLoading) {
       return <LoadingSpinner />
+    }
+
+    if (!note.id) {
+      return <NotFound />
     }
 
     return (
@@ -75,8 +86,10 @@ NoteHandler.propTypes = {
   populateSelectedNote: PropTypes.func.isRequired,
   updateNote: PropTypes.func.isRequired,
   saveNote: PropTypes.func.isRequired,
+  isSaving: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   params: PropTypes.shape({
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
   }).isRequired,
   children: PropTypes.node,
   location: PropTypes.shape({

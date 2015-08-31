@@ -75,7 +75,7 @@ Note.propTypes = {
   update: PropTypes.func,
   refresh: PropTypes.func,
   note: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     subject: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired
   }).isRequired
@@ -89,7 +89,7 @@ Note.defaultProps = {
   update: (() => { console.log('no update method provided') }),
   refresh: (() => { console.log('no refresh method provided') }),
   note: {
-    id: 999,
+    id: 0,
     subject: 'abc',
     content: 'dsfdghjh'
   }

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 class NoteListElement extends Component {
   render () {
@@ -10,9 +11,11 @@ class NoteListElement extends Component {
 
     return (
       <li>
-        <span>id: {id} | </span>
-        <span>subject: {} | </span>
-        <span><button onClick={deleteNote}>Delete</button></span>
+        <Link to={`/note/${id}`} >
+          <span>id: {id} | </span>
+          <span>subject: {subject} | </span>
+        </Link>
+          <span><button onClick={deleteNote}>Delete</button></span>
       </li>
     );
   }

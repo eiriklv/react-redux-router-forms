@@ -49,6 +49,26 @@ function populateInboxError(error) {
   };
 }
 
+function populateSelectedNotePending() {
+  return {
+    type: POPULATE_SELECTED_NOTE_PENDING
+  };
+}
+
+function populateSelectedNoteSuccess(note) {
+  return {
+    type: POPULATE_SELECTED_NOTE_SUCCESS,
+    note
+  };
+}
+
+function populateSelectedNoteError(error) {
+  return {
+    type: POPULATE_SELECTED_NOTE_ERROR,
+    error
+  };
+}
+
 function saveNotePending() {
   return {
     type: SAVE_NOTE_PENDING
@@ -68,21 +88,24 @@ function saveNoteError(error) {
   };
 }
 
-function deleteNotePending() {
+function deleteNotePending(id) {
   return {
-    type: DELETE_NOTE_PENDING
+    type: DELETE_NOTE_PENDING,
+    id
   };
 }
 
-function deleteNoteSuccess() {
+function deleteNoteSuccess(id) {
   return {
-    type: DELETE_NOTE_SUCCESS
+    type: DELETE_NOTE_SUCCESS,
+    id
   };
 }
 
 function deleteNoteError(error) {
   return {
     type: DELETE_NOTE_ERROR,
+    id,
     error
   };
 }
@@ -123,7 +146,7 @@ export function populateInbox() {
   }
 }
 
-export function populateSelectedNote() {
+export function populateSelectedNote(id) {
   return (dispatch) => {
     dispatch(populateSelectedNotePending());
     return getNoteById(id)
@@ -153,11 +176,14 @@ export function deleteNote(id) {
   }
 }
 
-export function createNote() {
+export function createNote(transitionTo) {
   return (dispatch, getState) => {
     dispatch(createNotePending());
     return createNewNote()
-      .then((id) => dispatch(createNoteSuccess(id))) // dispatch route change here
+      .then((id) => {
+        dispatch(createNoteSuccess(id))
+        transitionTo(`/note/${id}`)
+      })
       .catch((error) => dispatch(createNoteError(error)))
   }
 }

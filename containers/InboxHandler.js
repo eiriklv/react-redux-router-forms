@@ -32,7 +32,10 @@ class InboxHandler extends Component {
 
   handleCreateNote() {
     const { createNote } = this.props;
-    createNote();
+    const { history } = this.context;
+    const transitionTo = history.pushState.bind(history, null);
+    
+    createNote(transitionTo);
   }
 
   handleDeleteNote(id) {
@@ -62,6 +65,10 @@ class InboxHandler extends Component {
     );
   }
 }
+
+InboxHandler.contextTypes = {
+  history: PropTypes.object.isRequired
+};
 
 InboxHandler.propTypes = {
   notes: PropTypes.array.isRequired,

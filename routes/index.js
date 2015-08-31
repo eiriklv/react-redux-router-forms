@@ -10,9 +10,8 @@ import NotFound from '../components/NotFound';
 const routes = (() =>
   <Router history={createHistory()}>
     <Route path="/" component={App}>
-      <Route path="/inbox" component={InboxHandler}>
-        <Route path="/inbox/:id" component={NoteHandler} />
-      </Route>
+      <Route path="/inbox" component={InboxHandler} />
+      <Route path="/note/:id" component={NoteHandler} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>

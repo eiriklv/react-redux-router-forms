@@ -22,11 +22,7 @@ const defaultSelectedNoteState = {
   isLoading: false,
   isSaving: false,
   unsavedChanges: false,
-  note: {
-    id: 0,
-    subject: 'default',
-    content: 'default'
-  }
+  note: {}
 };
 
 const defaultInboxState = {
@@ -54,7 +50,11 @@ function inbox(state = defaultInboxState, action) {
     case DELETE_NOTE_PENDING:
       return state;
     case DELETE_NOTE_SUCCESS:
-      return state;
+      return _.assign(
+        {},
+        state,
+        { notes: _.filter(state.notes, (note) => note.id !== action.id) }
+      );
     case DELETE_NOTE_ERROR:
       return state;
 
