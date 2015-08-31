@@ -10,6 +10,11 @@ class App extends Component {
     router.transitionTo(`/${nextValue}`);
   }
 
+  componentDidMount() {
+    console.log('props:', this.props);
+    console.log('context:', this.context);
+  }
+
   render() {
     // Injected by React Router
     const { location, children } = this.props;
@@ -28,7 +33,7 @@ class App extends Component {
 }
 
 App.contextTypes = {
-  router: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired
 };
 
 App.propTypes = {

@@ -16,16 +16,16 @@ class SecondPage extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.saveForm = ::this.saveForm;
-    this.refreshFrom = ::this.refreshForm;
-    this.updateForm = ::this.updateForm;
+    this.handleSaveData = ::this.handleSaveData;
+    this.handleRefreshData = ::this.handleRefreshData;
+    this.handleUpdateData = ::this.handleUpdateData;
   }
 
   componentDidMount() {
-    this.refreshForm();
+    this.handleRefreshData();
   }
 
-  saveForm() {
+  handleSaveData() {
     const {
       isSaving,
       unsavedChanges,
@@ -40,12 +40,12 @@ class SecondPage extends Component {
     }
   }
 
-  refreshForm() {
+  handleRefreshData() {
     const { populateData } = this.props;
     populateData();
   }
 
-  updateForm(field, event) {
+  handleUpdateData(field, event) {
     const { updateData } = this.props;
 
     updateData({
@@ -68,9 +68,9 @@ class SecondPage extends Component {
         data={this.props.data}
         isSaving={this.props.isSaving}
         unsavedChanges={this.props.unsavedChanges}
-        refresh={this.refreshForm}
-        save={this.saveForm}
-        update={this.updateForm}
+        refresh={this.handlePopulateData}
+        save={this.handleSaveData}
+        update={this.handleUpdateData}
       />
     );
   }
@@ -98,4 +98,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SecondPage);
-

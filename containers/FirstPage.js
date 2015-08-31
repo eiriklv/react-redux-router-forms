@@ -16,16 +16,16 @@ class FirstPage extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.saveForm = ::this.saveForm;
-    this.refreshFrom = ::this.refreshForm;
-    this.updateForm = ::this.updateForm;
+    this.handleSaveData = ::this.handleSaveData;
+    this.handleRefreshData = ::this.handleRefreshData;
+    this.handleUpdateData = ::this.handleUpdateData;
   }
 
   componentDidMount() {
-    this.refreshForm();
+    this.handleRefreshData();
   }
 
-  saveForm() {
+  handleSaveData() {
     const {
       isSaving,
       unsavedChanges,
@@ -40,12 +40,12 @@ class FirstPage extends Component {
     }
   }
 
-  refreshForm() {
+  handleRefreshData() {
     const { populateData } = this.props;
     populateData();
   }
 
-  updateForm(field, event) {
+  handleUpdateData(field, event) {
     const { updateData } = this.props;
 
     updateData({
@@ -64,13 +64,13 @@ class FirstPage extends Component {
 
     return (
       <MyForm
-        title='This is Form B'
+        title='This is Form A'
         data={this.props.data}
         isSaving={this.props.isSaving}
         unsavedChanges={this.props.unsavedChanges}
-        refresh={this.refreshForm}
-        save={this.saveForm}
-        update={this.updateForm}
+        refresh={this.handleRefreshData}
+        save={this.handleSaveData}
+        update={this.handleUpdateData}
       />
     );
   }
