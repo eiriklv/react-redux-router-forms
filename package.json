@@ -20,6 +20,7 @@
     "history": "1.8.x",
     "lodash": "3.10.x",
     "react": "0.13.x",
+    "react-formation": "eiriklv/react-formation",
     "react-redux": "1.0.x",
     "react-router": "1.0.0-beta4",
     "redux": "1.0.x",

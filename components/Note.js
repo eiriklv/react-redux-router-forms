@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import LoadingSpinner from './LoadingSpinner';
+import NoteForm from './forms/NoteForm';
 
 export default class Note extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.handleSuccess = ::this.handleSuccess;
+  }
+
   componentDidUpdate() {
     const {
       save,
@@ -15,6 +21,10 @@ export default class Note extends Component {
     }
   }
 
+  handleSuccess(data) {
+    alert(JSON.stringify(data));
+  }
+
   render() {
     const {
       save,
@@ -22,13 +32,8 @@ export default class Note extends Component {
       refresh,
       note,
       isSaving,
-      isLoading,
       unsavedChanges
     } = this.props;
-
-    if (isLoading) {
-      return <LoadingSpinner />
-    }
 
     return (
       <div>
@@ -42,26 +47,10 @@ export default class Note extends Component {
           )}
         </h1>
 
-        <div>
-          <label htmlFor=''>Subject: </label>
-          <input
-            id='subject'
-            name='subject'
-            type='text'
-            value={note.subject}
-            onChange={update.bind(null, 'subject')}
-          />
-        </div>
-        <div>
-          <label htmlFor=''>Content: </label>
-          <input
-            id='content'
-            name='content'
-            type='text'
-            value={note.content}
-            onChange={update.bind(null, 'content')}
-          />
-        </div>
+        <NoteForm
+          initial={note}
+          handleSuccess={this.handleSuccess}
+        />
       </div>
     );
   }

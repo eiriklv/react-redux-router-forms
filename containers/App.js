@@ -5,17 +5,9 @@ import Footer from '../components/Footer';
 import Home from '../components/Home';
 
 class App extends Component {
-  handleChange(nextValue) {
-    // Available thanks to contextTypes below
-    const { history } = this.context;
-    history.pushState(`/${nextValue}`);
-  }
-
   render() {
     // Injected by React Router
-    const { location, children } = this.props;
-    const { pathname } = location;
-    const value = pathname.substring(1);
+    const { children } = this.props;
 
     return (
       <div>

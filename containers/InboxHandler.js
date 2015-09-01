@@ -10,7 +10,7 @@ import {
   populateInbox,
   deleteNote,
   createNote
-} from '../actions';
+} from '../actions/inbox-actions';
 
 class InboxHandler extends Component {
   constructor(props, context) {
@@ -54,8 +54,8 @@ class InboxHandler extends Component {
 
     return (
       <div>
-        <button onClick={() => { this.handleCreateNote() }}>Create New</button>
-        <button onClick={() => { this.handleRefreshData() }}>Refresh List</button>
+        <button onClick={this.handleCreateNote}>Create New</button>
+        <button onClick={this.handleRefreshData}>Refresh List</button>
         
         <NoteList
           notes={this.props.notes}

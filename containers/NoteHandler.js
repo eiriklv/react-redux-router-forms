@@ -11,7 +11,7 @@ import {
   populateSelectedNote,
   updateNote,
   saveNote
-} from '../actions';
+} from '../actions/selected-note-actions';
 
 class NoteHandler extends Component {
   constructor(props, context) {
@@ -40,12 +40,9 @@ class NoteHandler extends Component {
     populateSelectedNote(params.id);
   }
 
-  handleUpdateNote(field, event) {
+  handleUpdateNote(note) {
     const { updateNote } = this.props;
-
-    updateNote({
-      [field]: event.target.value
-    });
+    updateNote(note);
   }
 
   render () {
