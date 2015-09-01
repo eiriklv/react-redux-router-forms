@@ -22,7 +22,7 @@ class NoteListElement extends Component {
 }
 
 NoteListElement.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   subject: PropTypes.string.isRequired,
   deleteNote: PropTypes.func.isRequired
 };

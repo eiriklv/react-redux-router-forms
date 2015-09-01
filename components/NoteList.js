@@ -18,6 +18,7 @@ class NoteList extends Component {
     
     let notelist = notes.map((note) => 
       <NoteListElement
+        key={`note-${note.id}`}
         {...note}
         deleteNote={this.handleDeleteNote.bind(null, note.id)}
       />

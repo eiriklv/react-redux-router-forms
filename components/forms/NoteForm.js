@@ -1,4 +1,4 @@
-import { CreateForm, ErrorMessage} from 'react-formation';
+import { CreateForm, ErrorMessage } from 'react-formation';
 
 const isMinLength = (len) => {
   return (item) => {
@@ -9,17 +9,21 @@ const isMinLength = (len) => {
 };
 
 const NoteForm = CreateForm({
-  schema: {
-    subject: {
-      label: 'Subject',
-      type: isMinLength(20),
-      required: true
-    },
-    content: {
-      label: 'Content',
-      type: isMinLength(40),
-      required: true
-    }
+  getSchema() {
+    return {
+      subject: {
+        label: 'Subject',
+        type: isMinLength(20),
+        required: true,
+        initial: this.props.initial.subject
+      },
+      content: {
+        label: 'Content',
+        type: isMinLength(40),
+        required: true,
+        initial: this.props.initial.content
+      }
+    };
   },
 
   onSuccess(data) {
@@ -47,10 +51,10 @@ const NoteForm = CreateForm({
             name="content"
             valueLink={this.linkField('content')}
           />
-          <ErrorMessage show={true} field="content" />
+          <ErrorMessage field="content" />
         </div>
 
-        <p><button onClick={this.submitForm}>Submit</button></p>
+        <button onClick={this.submitForm}>Submit</button>
     </form>
     );
   }
