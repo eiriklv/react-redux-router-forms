@@ -27,36 +27,35 @@ function populateInboxPending() {
 function populateInboxSuccess(notes) {
   return {
     type: POPULATE_INBOX_SUCCESS,
-    notes
+    payload: { notes }
   };
 }
 
 function populateInboxError(error) {
   return {
     type: POPULATE_INBOX_ERROR,
-    error
+    payload: { error }
   };
 }
 
 function deleteNotePending(id) {
   return {
     type: DELETE_NOTE_PENDING,
-    id
+    payload: { id }
   };
 }
 
 function deleteNoteSuccess(id) {
   return {
     type: DELETE_NOTE_SUCCESS,
-    id
+    payload: { id }
   };
 }
 
 function deleteNoteError(error) {
   return {
     type: DELETE_NOTE_ERROR,
-    id,
-    error
+    payload: { id, error }
   };
 }
 
@@ -69,14 +68,14 @@ function createNotePending() {
 function createNoteSuccess(id) {
   return {
     type: CREATE_NOTE_SUCCESS,
-    id
+    payload: { id }
   };
 }
 
 function createNoteError(error) {
   return {
     type: CREATE_NOTE_ERROR,
-    error
+    payload: { error }
   };
 }
 

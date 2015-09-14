@@ -25,14 +25,14 @@ function populateSelectedNotePending() {
 function populateSelectedNoteSuccess(note) {
   return {
     type: POPULATE_SELECTED_NOTE_SUCCESS,
-    note
+    payload: { note }
   };
 }
 
 function populateSelectedNoteError(error) {
   return {
     type: POPULATE_SELECTED_NOTE_ERROR,
-    error
+    payload: { error }
   };
 }
 
@@ -51,14 +51,14 @@ function saveNoteSuccess() {
 function saveNoteError(error) {
   return {
     type: SAVE_NOTE_ERROR,
-    error
+    payload: { error }
   };
 }
 
 function updateNoteSuccess(note) {
   return {
     type: UPDATE_NOTE_SUCCESS,
-    note
+    payload: { note }
   };
 }
 
@@ -74,7 +74,7 @@ export function populateSelectedNote(id) {
 export function saveNote() {
   return (dispatch, getState) => {
     let note = getState().selectedNote.note;
-    let id = note.id;
+    let { id } = note;
 
     dispatch(saveNotePending());
     return updateNoteById(id, note)

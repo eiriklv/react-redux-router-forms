@@ -25,11 +25,11 @@ function inbox(state = defaultInboxState, action) {
       return _.assign({}, state, {
         isLoading: false,
         error: null,
-        notes: action.notes
+        notes: action.payload.notes
       });
     case POPULATE_INBOX_ERROR:
       return _.assign({}, state, {
-        error: action.error,
+        error: action.payload.error,
       });
     case DELETE_NOTE_PENDING:
       return state;
@@ -37,7 +37,7 @@ function inbox(state = defaultInboxState, action) {
       return _.assign(
         {},
         state,
-        { notes: _.filter(state.notes, (note) => note.id !== action.id) }
+        { notes: _.filter(state.notes, (note) => note.id !== action.payload.id) }
       );
     case DELETE_NOTE_ERROR:
       return state;

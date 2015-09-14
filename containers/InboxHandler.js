@@ -34,7 +34,7 @@ class InboxHandler extends Component {
     const { createNote } = this.props;
     const { history } = this.context;
     const transitionTo = history.pushState.bind(history, null);
-    
+
     createNote(transitionTo);
   }
 
@@ -56,7 +56,7 @@ class InboxHandler extends Component {
       <div>
         <button onClick={this.handleCreateNote}>Create New</button>
         <button onClick={this.handleRefreshData}>Refresh List</button>
-        
+
         <NoteList
           notes={this.props.notes}
           deleteNote={this.handleDeleteNote}

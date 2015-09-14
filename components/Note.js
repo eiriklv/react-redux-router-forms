@@ -22,7 +22,8 @@ export default class Note extends Component {
   }
 
   handleSuccess(data) {
-    alert(JSON.stringify(data));
+    const { update } = this.props;
+    update(data);
   }
 
   render() {

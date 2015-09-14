@@ -28,11 +28,13 @@ function selectedNote(state = defaultSelectedNoteState, action) {
       return _.assign({}, state, {
         isLoading: false,
         error: null,
-        note: action.note
+        isSaving: false,
+        unsavedChanges: false,
+        note: action.payload.note
       });
     case POPULATE_SELECTED_NOTE_ERROR:
       return _.assign({}, state, {
-        error: action.error,
+        error: action.payload.error,
       });
     case SAVE_NOTE_PENDING:
       return _.assign({}, state, {
@@ -46,12 +48,12 @@ function selectedNote(state = defaultSelectedNoteState, action) {
       });
     case SAVE_NOTE_ERROR:
       return _.assign({}, state, {
-        error: action.error,
+        error: action.payload.error,
       });
     case UPDATE_NOTE_SUCCESS:
       return _.assign({}, state, {
         unsavedChanges: true,
-        note: action.note
+        note: _.assign({}, state.note, action.payload.note)
       });
 
     default:

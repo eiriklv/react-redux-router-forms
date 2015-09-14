@@ -46,12 +46,12 @@ const NoteForm = CreateForm({
 
         <div className="form-group">
           <label>Email (error is shown immediately)</label>
-          <input 
+          <input
             type="text"
             name="content"
             valueLink={this.linkField('content')}
           />
-          <ErrorMessage field="content" />
+          <ErrorMessage show={true} field="content" />
         </div>
 
         <button onClick={this.submitForm}>Submit</button>
