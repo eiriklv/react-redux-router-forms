@@ -82,6 +82,7 @@ function createNoteError(error) {
 export function populateInbox() {
   return (dispatch) => {
     dispatch(populateInboxPending());
+
     return getInbox()
       .then((notes) => dispatch(populateInboxSuccess(notes)))
       .catch((error) => dispatch(populateInboxError(error)))
@@ -91,6 +92,7 @@ export function populateInbox() {
 export function deleteNote(id) {
   return (dispatch, getState) => {
     dispatch(deleteNotePending());
+
     return deleteNoteById(id)
       .then(() => dispatch(deleteNoteSuccess(id)))
       .catch((error) => dispatch(deleteNoteError(error)))
@@ -100,6 +102,7 @@ export function deleteNote(id) {
 export function createNote(transitionTo) {
   return (dispatch, getState) => {
     dispatch(createNotePending());
+    
     return createNewNote()
       .then((id) => {
         dispatch(createNoteSuccess(id))

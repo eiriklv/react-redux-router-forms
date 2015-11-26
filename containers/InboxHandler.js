@@ -44,11 +44,17 @@ class InboxHandler extends Component {
   }
 
   render () {
-    if (this.props.error) {
-      return <ErrorMessage error={this.props.error} />
+    const {
+      error,
+      isLoading,
+      notes
+    } = this.props;
+
+    if (error) {
+      return <ErrorMessage error={error} />
     }
 
-    if (this.props.isLoading) {
+    if (isLoading) {
       return <LoadingSpinner />
     }
 
@@ -58,7 +64,7 @@ class InboxHandler extends Component {
         <button onClick={this.handleRefreshData}>Refresh List</button>
 
         <NoteList
-          notes={this.props.notes}
+          notes={notes}
           deleteNote={this.handleDeleteNote}
         />
       </div>

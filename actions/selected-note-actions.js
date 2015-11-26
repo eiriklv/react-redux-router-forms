@@ -65,6 +65,7 @@ function updateNoteSuccess(note) {
 export function populateSelectedNote(id) {
   return (dispatch) => {
     dispatch(populateSelectedNotePending());
+
     return getNoteById(id)
       .then((note) => dispatch(populateSelectedNoteSuccess(note)))
       .catch((error) => dispatch(populateSelectedNoteError(error)))
@@ -77,6 +78,7 @@ export function saveNote() {
     let { id } = note;
 
     dispatch(saveNotePending());
+
     return updateNoteById(id, note)
       .then(() => dispatch(saveNoteSuccess()))
       .catch((error) => dispatch(saveNoteError(error)))

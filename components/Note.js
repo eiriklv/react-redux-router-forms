@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import LoadingSpinner from './LoadingSpinner';
-import NoteForm from './forms/NoteForm';
+import NoteForm from './NoteForm';
 
 export default class Note extends Component {
   constructor(props, context) {

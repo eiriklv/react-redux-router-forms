@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 
 export default class ErrorMessage extends Component {
   render() {
+    const { error } = this.props;
+
     return (
-      <div>Error: {this.props.error}</div>
+      <div>Error: {error}</div>
     );
   }
 }
